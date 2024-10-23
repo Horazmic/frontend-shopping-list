@@ -24,7 +24,7 @@ export default function ListDetail() {
 
   const handleSave = () => {
     setIsEditing(false);
-    // Here you would typically save the changes to the backend
+    // save to server
   };
 
   const handleNameChange = (e) => {
@@ -51,9 +51,14 @@ export default function ListDetail() {
       : null}
       <ul className="space-y-2">
         {shoppingList.items.map((item) => (
-          <li key={item.id} className="flex justify-between items-center bg-white p-3 rounded shadow">
-            <span>{item.name}</span>
-            <span>{item.quantity} {item.unit}</span>
+          <li key={item.id} className="flex items-center bg-white p-3 rounded shadow">
+            <span className="font-bold flex-grow">{item.name}</span>
+            <span className="mx-2">{item.quantity}</span> 
+            <span className="mr-4">{item.unit}</span>
+            <div className="flex gap-2">
+              <button className="bg-red-500 text-white px-4 py-1 rounded-md font-bold hover:bg-red-600 transition duration-300">Remove</button>
+              <button className="bg-blue-500 text-white px-4 py-1 rounded-md font-bold hover:bg-blue-600 transition duration-300">Edit</button>
+            </div>
           </li>
         ))}
       </ul>

@@ -106,7 +106,7 @@ export default function ListListPage() {
                     ))}
                 </div>
                 <button 
-                    className="mt-6 bg-blue-600 text-white px-6 py-3 rounded-md font-bold hover:bg-blue-700 transition duration-300"
+                    className="mt-6 bg-green-600 text-white px-6 py-3 rounded-md font-bold hover:bg-green-700 transition duration-300"
                     onClick={() => setShowAddListForm(true)}
                 >
                     Add New List

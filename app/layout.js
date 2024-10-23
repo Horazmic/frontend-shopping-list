@@ -58,22 +58,21 @@ function Header() {
               alt="Shopping Cart Logo"
               width={40}
               height={40}
-              className="mr-2"
+              className="mr-2 hover:opacity-80"
             />
           </Link>
-          <Link href="/" className="hover:underline">
-            <h1 className="text-2xl">Shopping List App</h1>
+          <Link href="/" className="hover:text-gray-300 font-bold">
+            <h1 className="text-2xl font-bold">Shopping List App</h1>
           </Link>
         </div>
         <nav>
-          <ul className="flex space-x-4 justify-center">
-            <li><Link href="/" className="hover:underline">Home</Link></li>
-            <li><Link href="/list-list" className="hover:underline">My Lists</Link></li>
-            <li><Link href="/about" className="hover:underline">About</Link></li>
+          <ul className="flex space-x-4 justify-center font-bold text-2xl">
+            <li><Link href="/list-list" className="hover:text-gray-300">Home</Link></li>
+            <li><Link href="/about" className="hover:text-gray-300">About</Link></li>
           </ul>
         </nav>
         <select 
-          className="bg-white text-blue-600 px-2 py-1 rounded"
+          className="bg-white text-black px-2 py-2 rounded bg-gray-100"
           value={selectedUser}
           onChange={handleUserChange}
         >
@@ -88,7 +87,7 @@ function Header() {
 
 function Footer() {
   return (
-    <footer className="bg-gray-800 text-white p-4 text-center">
+    <footer className="bg-blue-600 text-white p-4 text-center font-bold">
       © {new Date().getFullYear()} Shopping List App
     </footer>
   );
