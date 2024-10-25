@@ -1,6 +1,6 @@
 'use client'
-
 import { useState } from 'react';
+import ItemCard from './item-card';
 
 const mockShoppingList = {
   id: 1,
@@ -16,50 +16,79 @@ const mockShoppingList = {
 
 export default function ListDetail() {
   const [shoppingList, setShoppingList] = useState(mockShoppingList);
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditingListName, setIsEditingListName] = useState(false);
+  const [isEditingItem, setIsEditingItem] = useState(false);
 
-  const handleEdit = () => {
-    setIsEditing(true);
+  const handleEditListName = () => {
+    setIsEditingListName(true);
   };
 
-  const handleSave = () => {
-    setIsEditing(false);
-    // save to server
+  const handleSaveListName = () => {
+    setIsEditingListName(false);
+    // TODO: Implement server-side save functionality
   };
 
   const handleNameChange = (e) => {
     setShoppingList({ ...shoppingList, name: e.target.value });
   };
 
+  const handleQuantityChange = (e) => {
+    setShoppingList({ ...shoppingList, quantity: e.target.value });
+  };
+
+  const handleSaveItem = () => {
+    setIsEditingItem(false);
+  };
+
+  const handleEditItem = () => {
+    setIsEditingItem(true);
+  };
+
   return (
     <div className="container mx-auto p-4">
-      {isEditing ? (
-        <input
-          type="text"
-          value={shoppingList.name}
-          onChange={handleNameChange}
-          className="text-2xl font-bold mb-4 border-b-2 border-blue-500 focus:outline-none"
-        />
+      {/* List name editing section */}
+      {isEditingListName ? (
+        <div className="">
+          <input
+            type="text"
+            value={shoppingList.name}
+            onChange={handleNameChange}
+            className="text-2xl font-bold mb-4 border-blue-500 focus:outline-none underline"
+            />
+          <button onClick={handleSaveListName} className="text-lg bg-green-500 text-white px-4 py-1 rounded font-bold hover:bg-green-600 transition duration-300">Save</button>
+        </div>
       ) : (
         <div className="flex items-center mb-4">
           <h1 className="text-2xl font-bold mr-4">{shoppingList.name}</h1>
-          <button onClick={handleEdit} className="bg-blue-500 text-white px-4 py-1 rounded">Edit</button>
+          <button onClick={handleEditListName} className="bg-blue-500 text-white px-4 py-1 rounded font-bold hover:bg-blue-600 transition duration-300">Edit</button>
         </div>
       )}
-      {isEditing ?
-        <button onClick={handleSave} className="bg-green-500 text-white px-4 py-1 rounded">Save</button>
-      : null}
-      <ul className="space-y-2">
+      {/* Shopping list items */}
+      <ul key={shoppingList.id} className="space-y-2">
         {shoppingList.items.map((item) => (
-          <li key={item.id} className="flex items-center bg-white p-3 rounded shadow">
-            <span className="font-bold flex-grow">{item.name}</span>
-            <span className="mx-2">{item.quantity}</span> 
-            <span className="mr-4">{item.unit}</span>
+          <div className="flex-grow flex justify-between bg-white p-3 rounded shadow">
+            {isEditingItem ? (
+                <>
+                    <input type="text" value={item.name} onChange={(e) => handleNameChange(e.target.value)} className="flex-grow font-bold border-2 border-blue-500 rounded p-1 mr-2" />
+                    <input type="text" value={item.quantity} onChange={(e) => handleQuantityChange(e.target.value)} className="flex-grow border-2 border-blue-500 rounded p-1" />
+                </>
+            ) : (
+                <>
+                    <span className="font-bold flex-grow text-lg rounded p-1">{item.name}</span>
+                    <span className="mr-8 text-lg rounded p-1">{item.quantity} {item.unit}</span>
+                </>
+            )}  
             <div className="flex gap-2">
-              <button className="bg-red-500 text-white px-4 py-1 rounded-md font-bold hover:bg-red-600 transition duration-300">Remove</button>
-              <button className="bg-blue-500 text-white px-4 py-1 rounded-md font-bold hover:bg-blue-600 transition duration-300">Edit</button>
+                {isEditingItem ? (
+                    <button className="bg-blue-500 text-white px-4 py-1 rounded-md font-bold hover:bg-blue-600 transition duration-300" onClick={handleSaveItem}>Save</button>
+            ) : (
+                <>
+                    <button className="bg-red-500 text-white px-4 py-1 rounded-md font-bold hover:bg-red-600 transition duration-300">Remove</button>
+                    <button className="bg-blue-500 text-white px-4 py-1 rounded-md font-bold hover:bg-blue-600 transition duration-300" onClick={handleEditItem}>Edit</button>
+                </>
+              )}
             </div>
-          </li>
+          </div>  
         ))}
       </ul>
     </div>

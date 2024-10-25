@@ -7,7 +7,7 @@ export default function Page() {
   const router = useRouter();
 
   useEffect(() => {
-    router.push('/list-list');
+    router.push('/list-overview');
   }, [router]);
 
   return <div className="flex min-h-screen bg-gray-100"></div>;   

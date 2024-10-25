@@ -19,7 +19,7 @@ const geistMono = localFont({
 
 // export const metadata = {
 //   title: "Shopping List App",
-//   description: "Manage your shopping lists with ease",
+//   description: "Manage your shopping lists",
 // };
 
 export default function RootLayout({ children }) {
@@ -67,7 +67,7 @@ function Header() {
         </div>
         <nav>
           <ul className="flex space-x-4 justify-center font-bold text-2xl">
-            <li><Link href="/list-list" className="hover:text-gray-300">Home</Link></li>
+            <li><Link href="/list-overview" className="hover:text-gray-300">Home</Link></li>
             <li><Link href="/about" className="hover:text-gray-300">About</Link></li>
           </ul>
         </nav>
